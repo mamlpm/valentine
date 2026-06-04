@@ -108,7 +108,11 @@
         const gifDisplay = document.getElementById('gif-display');
         const question = document.getElementById('question');
         const buttonsContainer = document.getElementById('buttons-container');
-        const buttonCalendarContainer = document.getElementById('calendar-button-container')
+        const buttonCalendarContainer = document.getElementById('calendar-button-container');
+
+        const animacionTriunfoSrc = "animacion.gif";
+        const preloadedImage = new Image();
+        preloadedImage.src = animacionTriunfoSrc;
         const noPhrases = [
             "¿Estás segura?",
             "¿Segura segura?",
@@ -150,7 +154,8 @@
             buttonCalendarContainer.classList.remove('hidden');
 
             // 3. Cargamos tu GIF personalizado que está en la misma carpeta
-            gifDisplay.src = "animacion.gif";
+            gifDisplay.src = animacionTriunfoSrc;
+
             const titulo = encodeURIComponent("Cita ❤️");
             const detalles = encodeURIComponent("¡Llegó el día de nuestra cita! Me pasas a buscar.");
 
