@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi Valentín?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fa;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .gif-container {
+            height: 300px; /* Incrementado un poco para que tu GIF se aprecie mejor */
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            max-height: 100%;
+            border-radius: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            min-height: 150px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #btn-yes {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #btn-no {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="gif-container">
+            <img id="gif-display" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM29icXNndXN6OHhodm95Ym96b3NyamV5bms2ZXg0M296cmN3eWV6MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Gatito tierno">
+        </div>
+
+        <h1 id="question">Will you be my Valentine?</h1>
+
+        <div class="buttons" id="buttons-container">
+            <button id="btn-yes">Yes</button>
+            <button id="btn-no">No</button>
+        </div>
+    </div>
+
+    <script>
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+        const gifDisplay = document.getElementById('gif-display');
+        const question = document.getElementById('question');
+        const buttonsContainer = document.getElementById('buttons-container');
+
+        const noPhrases = [
+            "Are you sure?",
+            "Really sure?",
+            "Think again!",
+            "Last chance!",
+            "Surely not?",
+            "You might regret this!",
+            "Give it a thought!",
+            "Are you absolutely certain?",
+            "This could be a mistake!",
+            "Have a heart!",
+            "Don't be so cold!",
+            "Change of heart?",
+            "Wouldn't you reconsider?",
+            "Is that your final answer?",
+            "You're breaking my heart... ;("
+        ];
+
+        let phraseIndex = 0;
+        let yesButtonSize = 1.2;
+
+        btnNo.addEventListener('click', () => {
+            btnNo.textContent = noPhrases[phraseIndex];
+            
+            if (phraseIndex < noPhrases.length - 1) {
+                phraseIndex++;
+            }
+
+            yesButtonSize += 0.4; 
+            btnYes.style.fontSize = `${yesButtonSize}rem`;
+            btnYes.style.padding = `${yesButtonSize * 10}px ${yesButtonSize * 20}px`;
+        });
+
+        btnYes.addEventListener('click', () => {
+            // 1. Cambiamos el mensaje de celebración
+            question.textContent = "Ok yay!!!";
+            
+            // 2. Ocultamos los botones
+            buttonsContainer.classList.add('hidden');
+            
+            // 3. Cargamos tu GIF personalizado que está en la misma carpeta
+            gifDisplay.src = "PXL_20251208_230444477_exported_stabilized_1780573169877.gif";
+        });
+    </script>
+
+</body>
+</html>
