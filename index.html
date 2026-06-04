@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi Valentín?</title>
+    <title>¿Cita?</title>
     <style>
         body {
             display: flex;
@@ -28,7 +29,8 @@
         }
 
         .gif-container {
-            height: 300px; /* Incrementado un poco para que tu GIF se aprecie mejor */
+            height: 300px;
+            /* Incrementado un poco para que tu GIF se aprecie mejor */
             margin-bottom: 20px;
             display: flex;
             justify-content: center;
@@ -69,23 +71,34 @@
             color: white;
         }
 
+        #btn-calendar {
+            background-color: rgb(0, 195, 255);
+            color: white;
+        }
+
         .hidden {
             display: none;
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <div class="gif-container">
-            <img id="gif-display" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM29icXNndXN6OHhodm95Ym96b3NyamV5bms2ZXg0M296cmN3eWV6MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Gatito tierno">
+            <img id="gif-display"
+                src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM29icXNndXN6OHhodm95Ym96b3NyamV5bms2ZXg0M296cmN3eWV6MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif"
+                alt="Gatito tierno">
         </div>
 
-        <h1 id="question">Will you be my Valentine?</h1>
+        <h1 id="question">¿Quieres ir a una cita conmigo?</h1>
 
         <div class="buttons" id="buttons-container">
             <button id="btn-yes">Yes</button>
             <button id="btn-no">No</button>
+        </div>
+        <div class="calendar-button hidden" id="calendar-button-container">
+            <button id="btn-calendar">Añadir cita a calendar</button>
         </div>
     </div>
 
@@ -95,51 +108,68 @@
         const gifDisplay = document.getElementById('gif-display');
         const question = document.getElementById('question');
         const buttonsContainer = document.getElementById('buttons-container');
-
+        const buttonCalendarContainer = document.getElementById('calendar-button-container')
         const noPhrases = [
-            "Are you sure?",
-            "Really sure?",
-            "Think again!",
-            "Last chance!",
-            "Surely not?",
-            "You might regret this!",
-            "Give it a thought!",
-            "Are you absolutely certain?",
-            "This could be a mistake!",
-            "Have a heart!",
-            "Don't be so cold!",
-            "Change of heart?",
-            "Wouldn't you reconsider?",
-            "Is that your final answer?",
-            "You're breaking my heart... ;("
+            "¿Estás segura?",
+            "¿Segura segura?",
+            "¡¡Piénsalo bien!!",
+            "¡Última oportunidad!",
+            "No puede ser",
+            "¡Te arrepentirás!",
+            "¡Piénsalo!",
+            "¿Estás absolutamente segura?",
+            "¡Te podrías estar equivocando!",
+            "Busca dentro de tu corazón",
+            "No seas tan fría",
+            "¿Cambio de opinión?",
+            "Reconsidera, porfis",
+            "Es tu respuesta final?",
+            "Me rompes el mio cuore"
         ];
 
         let phraseIndex = 0;
         let yesButtonSize = 1.2;
 
         btnNo.addEventListener('click', () => {
-            btnNo.textContent = noPhrases[phraseIndex];
-            
-            if (phraseIndex < noPhrases.length - 1) {
-                phraseIndex++;
-            }
+            let phraseIndexAid = phraseIndex;
+            btnNo.textContent = phraseIndex < noPhrases.length - 1 ? noPhrases[phraseIndex] : noPhrases[Math.floor(Math.random() * (noPhrases.length - 1 - 0 + 1)) + 0];
 
-            yesButtonSize += 0.4; 
+            phraseIndex++;
+
+            yesButtonSize += 0.4;
             btnYes.style.fontSize = `${yesButtonSize}rem`;
             btnYes.style.padding = `${yesButtonSize * 10}px ${yesButtonSize * 20}px`;
         });
 
         btnYes.addEventListener('click', () => {
             // 1. Cambiamos el mensaje de celebración
-            question.textContent = "Ok yay!!!";
-            
+            question.textContent = "Vamoooooosh! La cita será día 15 de junio del 2026 (sí, nos va bién, he mirado el calendar). Te pasaré a buscar.";
+
             // 2. Ocultamos los botones
             buttonsContainer.classList.add('hidden');
-            
+            buttonCalendarContainer.classList.remove('hidden');
+
             // 3. Cargamos tu GIF personalizado que está en la misma carpeta
-            gifDisplay.src = "PXL_20251208_230444477_exported_stabilized_1780573169877.gif";
+            gifDisplay.src = "animacion.gif";
+            const titulo = encodeURIComponent("Cita ❤️");
+            const detalles = encodeURIComponent("¡Llegó el día de nuestra cita! Me pasas a buscar.");
+
+            // Las fechas en Google Calendar van en formato AAAAMMDD (el 15 de junio es 20260615)
+            // Al ser un evento de todo el día, se pone la fecha de inicio y la de fin (que es el día siguiente)
+            const fechaInicio = "20260615";
+            const fechaFin = "20260616";
+
+            // Construimos la URL de Google Calendar
+            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${fechaInicio}/${fechaFin}&details=${detalles}`;
+
+            // Programamos el botón del calendario para que abra el enlace en una nueva pestaña/app
+            const btnCalendar = document.getElementById('btn-calendar');
+            btnCalendar.addEventListener('click', () => {
+                window.open(googleCalendarUrl, '_blank');
+            });
         });
     </script>
 
 </body>
+
 </html>
