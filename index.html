@@ -154,6 +154,7 @@
 
         btnYes.addEventListener('click', () => {
             if (siDirecto) {
+                debugger;
                 question.textContent = siDirectoIndex < siDirectoPhrases.length() - 1 ? siDirectoPhrases[siDirectoIndex] : siDirectoPhrases[Math.floor(Math.random() * (siDirectoPhrases.length - 1 - 0 + 1)) + 0]
             } else {
                 // 1. Cambiamos el mensaje de celebración
