@@ -154,7 +154,7 @@
 
         btnYes.addEventListener('click', () => {
             if (siDirecto) {
-                question.textContent = siDirectoIndex < siDirectoPhrases.length() - 1 ? siDirectoPhrases[siDirectoIndex] : siDirectoPhrases[Math.floor(Math.random() * (siDirectoPhrases.length() - 1 - 0 + 1)) + 0];
+                question.textContent = siDirectoIndex < siDirectoPhrases.length - 1 ? siDirectoPhrases[siDirectoIndex] : siDirectoPhrases[Math.floor(Math.random() * (siDirectoPhrases.length - 1 - 0 + 1)) + 0];
                 siDirectoIndex++;
             } else {
                 // 1. Cambiamos el mensaje de celebración
@@ -173,7 +173,7 @@
                 // Las fechas en Google Calendar van en formato AAAAMMDD (el 15 de junio es 20260615)
                 // Al ser un evento de todo el día, se pone la fecha de inicio y la de fin (que es el día siguiente)
                 const fechaInicio = "20261004";
-                const fechaFin = "20261004";
+                const fechaFin = "20261005";
 
                 // Construimos la URL de Google Calendar
                 const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${titulo}&dates=${fechaInicio}/${fechaFin}&details=${detalles}`;
