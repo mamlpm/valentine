@@ -154,9 +154,7 @@
 
         btnYes.addEventListener('click', () => {
             if (siDirecto) {
-                console.log("Estamos aquí");
-                question.textContent = siDirectoIndex < siDirectoPhrases.length() - 1 ? siDirectoPhrases[siDirectoIndex] : siDirectoPhrases[Math.floor(Math.random() * (siDirectoPhrases.length - 1 - 0 + 1)) + 0];
-                console.log(siDirectoIndex < siDirectoPhrases.length() - 1 ? siDirectoPhrases[siDirectoIndex] : siDirectoPhrases[Math.floor(Math.random() * (siDirectoPhrases.length - 1 - 0 + 1)) + 0])
+                question.textContent = siDirectoIndex < siDirectoPhrases.length() - 1 ? siDirectoPhrases[siDirectoIndex] : siDirectoPhrases[Math.floor(Math.random() * (siDirectoPhrases.length() - 1 - 0 + 1)) + 0];
                 siDirectoIndex++;
             } else {
                 // 1. Cambiamos el mensaje de celebración
